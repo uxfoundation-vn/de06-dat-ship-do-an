@@ -2,15 +2,15 @@
 
 # PRD Đặt ship đồ ăn
 
-> Đề gồm **1 tính năng**, là **1 luồng** gồm 5 bước và các màn hình: Khám phá quán & món → Giỏ hàng & đặt đơn → Quán nhận & chuẩn bị đơn → Tài xế nhận & giao đơn → Huỷ, đánh giá & sự cố. Sơ đồ chung xem [README](../README.md).
+> Đề gồm **1 tính năng**, là **1 luồng** gồm 4 bước và các màn hình: Khám phá quán & món → Giỏ hàng & đặt đơn → Theo dõi đơn → Huỷ, đánh giá & sự cố. Sơ đồ chung xem [README](../README.md).
 
 ## 1. Bối cảnh và vấn đề
 
 ### 1.1 Bối cảnh
 
-Nền tảng giao đồ ăn: khách chọn quán và món, đặt đơn; quán nhận và chuẩn bị; hệ thống tìm tài xế đúng lúc món xong; tài xế lấy món, giao tới khách; khách theo dõi trên bản đồ, đánh giá, báo sự cố nếu có. Đây là đề có **ba bên cùng thao tác trên một đơn** và **thời điểm phải khớp nhau** (món xong – tài xế tới).
+Ứng dụng đặt đồ ăn giao tận nơi, nhìn từ phía khách: chọn quán và món, đặt đơn, theo dõi quán chuẩn bị và tài xế giao tới trên bản đồ, nhận đồ rồi đánh giá, báo sự cố nếu có. Quán và tài xế dùng ứng dụng riêng, **ngoài phạm vi đề**; đề chỉ thiết kế những gì khách thấy và làm khi đơn đi qua quán và tài xế.
 
-Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhanh và nóng; quán vừa bán tại chỗ vừa nhận đơn online; tài xế muốn chạy được nhiều đơn, ít phải chờ. Một đơn đi qua ba ứng dụng, ba người, trong khoảng 30–45 phút. Bài toán thiết kế chính là **giữ ba bên cùng thấy một trạng thái**, đưa tài xế tới quán **đúng lúc món xong**, và xử lý công bằng khi có sự cố.
+Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhanh và nóng, biết rõ tổng tiền và giờ tới. Sau khi đặt, đơn đi qua quán và tài xế trong khoảng 30–45 phút; khách không thấy họ làm gì, chỉ thấy app báo. Bài toán thiết kế chính là **chọn và đặt nhanh**, **cho khách biết đơn đang ở đâu một cách trung thực**, và **xử lý công bằng khi có sự cố**.
 
 ### 1.2 Vấn đề
 
@@ -26,16 +26,12 @@ Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhan
 | Đặt hộ người khác nhưng số điện thoại là của mình | Tài xế không liên lạc được người nhận |
 | Món hết, giá đổi sau khi đã thêm vào giỏ | Đặt xong quán từ chối |
 | Bấm đặt nhiều lần vì mạng chậm | Hai đơn trùng |
-| Quầy ồn, không nghe chuông đơn mới | Đơn tự huỷ, khách bực, quán mất doanh thu |
-| Món hết nhưng quên tắt trên app | Phải từ chối đơn hoặc gọi khách đổi món |
-| Tài xế tới khi món chưa xong | Tài xế chờ lâu, bỏ đơn |
-| Món xong sớm nhưng tài xế chưa tới | Đồ ăn nguội |
-| Giờ cao điểm quá tải nhưng không có cách tạm dừng | Nhận đơn rồi làm trễ, bị đánh giá thấp |
-| Tài xế tới quán quá sớm | Chờ lâu, mất thu nhập, bỏ đơn |
-| Tài xế tới quá muộn | Đồ ăn nguội, khách đánh giá thấp quán |
-| Quán đông, tài xế lấy nhầm đơn | Hai khách nhận sai món |
-| Khách không biết tài xế đang ở đâu | Gọi hỏi liên tục, hoặc đi vắng khi tài xế tới |
-| Tài xế tới nơi không gặp khách | Đứng chờ, không biết xử lý đồ ăn thế nào |
+| Không biết quán đã nhận đơn chưa | Khách huỷ, đặt lại quán khác, đơn trùng |
+| Giờ giao dự kiến không đổi dù quán chậm | Khách thấy bị lừa, đánh giá thấp |
+| Quán hết món phải gọi điện cho khách | Khách không nghe máy, đơn treo |
+| Không thấy tài xế đang ở đâu | Gọi hỏi liên tục, hoặc đi vắng khi tài xế tới |
+| Lộ số điện thoại cá nhân cho tài xế | Lo ngại riêng tư |
+| Tài xế tới mà khách không biết | Tài xế chờ, giao thất bại |
 | Đặt nhầm nhưng không biết còn huỷ được không | Gọi hỗ trợ, hoặc để mặc rồi không nhận |
 | Thiếu món phải chat với hỗ trợ, chờ lâu | Khách bực, đánh giá 1 sao cả quán lẫn app |
 | Hoàn tiền lâu, không rõ hoàn bao nhiêu | Mất niềm tin |
@@ -50,12 +46,9 @@ Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhan
 - Tỉ lệ từ mở giỏ tới đặt đơn thành công ≥ 65%.
 - Tỉ lệ đơn tài xế phải gọi hỏi địa chỉ ≤ 15%.
 - 0 đơn trùng do bấm đặt nhiều lần.
-- Tỉ lệ đơn bị huỷ vì quán không phản hồi ≤ 2%.
-- Thời gian trung vị từ đơn tới quán đến khi quán nhận ≤ 60 giây.
-- Thời gian tài xế chờ tại quán trung vị ≤ 5 phút.
-- ≥ 95% đơn có tài xế trong 10 phút kể từ khi bắt đầu tìm.
-- Tỉ lệ lấy nhầm đơn ≤ 0,1%.
-- Tỉ lệ giao thất bại do không liên lạc được khách ≤ 1%.
+- Giảm 50% cuộc gọi khách hỏi "đơn tới đâu rồi".
+- ≥ 85% đơn giao trước giờ dự kiến cuối cùng hiển thị cho khách.
+- Tỉ lệ giao thất bại do khách không ra nhận ≤ 1%.
 - ≥ 70% sự cố thiếu món, sai món được hoàn tiền tự động trong 5 phút.
 - ≥ 35% đơn đã giao có đánh giá.
 - Tỉ lệ khách đặt lại trong 30 ngày sau khi có sự cố được xử lý ≥ 60%.
@@ -66,19 +59,16 @@ Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhan
 | --- | --- |
 | Dân văn phòng đặt trưa | Quán gần, giao nhanh, giá ổn; đặt lại món quen |
 | Sinh viên | Rẻ, ít phí giao, đang có ưu đãi của quán; Biết rõ từng khoản phí, trả tiền mặt |
-| Gia đình đặt tối | Quán nhiều món, đặt cho nhiều người |
+| Gia đình đặt tối | Quán nhiều món, đặt cho nhiều người; Biết đơn lớn có đủ món, khi nào tới |
 | Người chưa biết ăn gì | Gợi ý theo danh mục, món bán chạy |
-| Dân văn phòng | Giao tới toà nhà, ghi rõ tầng, sảnh; trả bằng ví |
+| Dân văn phòng | Giao tới toà nhà, ghi rõ tầng, sảnh; trả bằng ví; Biết giờ tới để xuống sảnh đúng lúc |
 | Người đặt hộ gia đình | Đổi tên, số điện thoại người nhận |
-| Chủ quán nhỏ, tự đứng quầy | Chuông to, nhận một chạm, chữ to |
-| Nhân viên quầy quán đông | Thấy đơn theo thứ tự, biết đơn nào trễ |
-| Chủ quán | Tạm dừng nhận đơn khi quá tải, tắt món hết nhanh |
-| Tài xế giao đồ ăn | Biết thu nhập trước khi nhận, điểm lấy, điểm giao rõ ràng, ít chờ |
-| Khách | Thấy tài xế trên bản đồ, giờ tới chính xác, liên lạc được |
-| Quán | Biết tài xế nào tới, khi nào tới; Nhận đánh giá cụ thể để cải thiện |
+| Sinh viên ở ký túc xá | Nhắn tài xế để ở bảo vệ, không phải xuống |
+| Khách lo riêng tư | Liên lạc tài xế không lộ số thật |
 | Khách đặt nhầm | Huỷ nhanh, không mất tiền |
 | Khách nhận thiếu, sai món | Báo bằng vài chạm, hoàn tiền ngay |
 | Khách hài lòng | Khen quán, tip tài xế dễ dàng |
+| Quán | Nhận đánh giá cụ thể để cải thiện |
 
 ## 3. Phạm vi
 
@@ -101,24 +91,18 @@ Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhan
 - Thanh toán: tiền mặt, ví liên kết.
 - Đặt đơn, chống đặt trùng.
 
-**Bước 3 · Quán nhận & chuẩn bị đơn**
+**Bước 3 · Theo dõi đơn**
 
-- Nhận đơn mới: chuông lặp, đếm ngược 3 phút, nhận với thời gian chuẩn bị, hoặc từ chối có lý do.
-- Danh sách đơn theo trạng thái: Mới, Đang làm, Chờ tài xế, Đã xong.
-- Chi tiết đơn: món, tuỳ chọn, ghi chú, dụng cụ; thông tin tài xế khi có.
-- Báo hết món sau khi đã nhận; gia hạn thời gian chuẩn bị; báo món đã xong.
-- Bật tắt món, tuỳ chọn hết hàng; tạm ngưng nhận đơn.
+- Màn theo dõi đơn: trạng thái, tiến trình, giờ giao dự kiến cập nhật liên tục.
+- Chờ quán xác nhận (đếm ngược); quán từ chối hoặc không phản hồi → huỷ và hoàn tiền.
+- Quán báo hết món sau khi nhận → khách chọn bỏ món hoặc huỷ đơn.
+- Quán cần thêm thời gian → khách được báo giờ mới.
+- Đang tìm tài xế; không tìm được → huỷ và hoàn tiền.
+- Thông tin tài xế, vị trí trên bản đồ, gọi và nhắn tin qua số trung gian.
+- Tài xế đã tới; giao thành công (kèm ảnh nếu để theo ghi chú); giao thất bại.
+- Banner đơn đang giao trên trang chủ.
 
-**Bước 4 · Tài xế nhận & giao đơn**
-
-- App tài xế: bật nhận đơn, yêu cầu đơn mới, nhận hoặc bỏ qua.
-- Thời điểm tìm tài xế theo thời gian chuẩn bị của quán.
-- Đến quán, đối chiếu và lấy món; chờ khi món chưa xong.
-- Giao: dẫn đường, đến nơi, giao tận tay hoặc theo ghi chú có ảnh, thu tiền mặt.
-- Không liên lạc được khách: quy trình chờ và giao thất bại.
-- Khách theo dõi đơn: trạng thái, tài xế, bản đồ, giờ dự kiến; gọi, nhắn tin qua số trung gian.
-
-**Bước 5 · Huỷ, đánh giá & sự cố**
+**Bước 4 · Huỷ, đánh giá & sự cố**
 
 - Khách huỷ đơn trước khi quán nhận; hướng dẫn khi không huỷ được nữa.
 - Hoàn tiền về ví cho các trường hợp huỷ không do lỗi khách.
@@ -138,14 +122,10 @@ Giờ trưa và tối là cao điểm: khách đói, muốn đồ ăn tới nhan
 - Đặt hẹn giờ.
 - Thanh toán thẻ trực tiếp.
 - Tách hoá đơn, xuất hoá đơn VAT.
-- Sửa menu, giá, ảnh (làm trên web quản lý quán, không thuộc đề).
-- Báo cáo doanh thu, đối soát tiền với nền tảng.
-- Nhiều chi nhánh, phân quyền nhân viên.
-- Kết nối máy POS, in phiếu bếp tự động → phase sau.
-- Ghép nhiều đơn cho một tài xế → phase sau.
-- Đăng ký, duyệt hồ sơ tài xế; ví và rút tiền của tài xế.
-- Tài xế riêng của quán.
-- Giao bằng xe ô tô, giao hàng cồng kềnh.
+- Ứng dụng của quán (nhận đơn, chuẩn bị) và của tài xế (nhận đơn, giao) – hệ thống bên ngoài, khách chỉ thấy kết quả.
+- Đổi địa chỉ, đổi món sau khi đặt.
+- Chia sẻ hành trình đơn cho người khác.
+- Chat với nhân viên hỗ trợ trong app (dùng kênh hỗ trợ chung).
 - Màn xử lý sự cố của nhân viên hỗ trợ (chỉ mô tả kết quả khách thấy).
 - Quán trả lời đánh giá → phase sau.
 - Chat trực tiếp với hỗ trợ trong app (dùng kênh hỗ trợ chung).
@@ -177,43 +157,31 @@ Ngoài ghim bản đồ, luôn có chỗ cho chi tiết "Toà A, tầng 5" và g
 
 Giá, món hết, quán mở đều được kiểm tra lại khi mở giỏ và khi bấm đặt.
 
-### 4.7 Không bỏ lỡ đơn
+### 4.7 Một câu nói rõ đơn đang ở đâu
 
-Đơn mới kêu lặp lại tới khi có người chạm; màn hình đơn mới chiếm toàn màn hình.
+Tiêu đề màn theo dõi luôn là một câu dễ hiểu ("Quán đang chuẩn bị", "Tài xế đang giao tới bạn") kèm giờ dự kiến.
 
-### 4.8 Một chạm cho việc thường gặp
+### 4.8 Giờ dự kiến phải trung thực
 
-Nhận đơn, báo xong món, tắt món hết đều một chạm, nút lớn.
+Mỗi khi quán chậm hoặc tài xế đổi đường, giờ dự kiến cập nhật ngay và khách được báo nếu trễ hơn.
 
-### 4.9 Quán kiểm soát tải
+### 4.9 Khách quyết định khi có thay đổi
 
-Quán chọn thời gian chuẩn bị và có thể tạm ngưng; app không ép quán nhận đơn khi quá tải.
+Món hết sau khi đã đặt: khách chọn bỏ món hay huỷ đơn, không để quán tự quyết.
 
-### 4.10 Đến đúng lúc món xong
+### 4.10 Liên lạc an toàn
 
-Hệ thống chọn thời điểm tìm tài xế theo thời gian chuẩn bị, không phải ngay khi đặt đơn.
+Gọi, nhắn với tài xế qua số trung gian; tin nhắn nhanh cho tình huống thường gặp.
 
-### 4.11 Lấy đúng đơn
-
-Mã đơn 6 ký tự to rõ ở App quán, App tài xế và trên túi đồ ăn (quán ghi tay); tài xế đối chiếu trước khi lấy.
-
-### 4.12 Ba bên cùng một sự thật
-
-Mỗi bước của tài xế cập nhật ngay cho khách và quán.
-
-### 4.13 Riêng tư khi liên lạc
-
-Gọi và nhắn qua số trung gian, không lộ số thật.
-
-### 4.14 Tin khách trước, kiểm tra sau
+### 4.11 Tin khách trước, kiểm tra sau
 
 Sự cố nhỏ có ảnh được hoàn tiền tự động; kiểm tra lạm dụng dựa trên lịch sử, không bắt mọi khách chờ.
 
-### 4.15 Nói rõ còn huỷ được không
+### 4.12 Nói rõ còn huỷ được không
 
 Nút huỷ chỉ xuất hiện khi huỷ được; khi không, nói vì sao và có lối tới hỗ trợ.
 
-### 4.16 Đánh giá để cải thiện, không để trút giận
+### 4.13 Đánh giá để cải thiện, không để trút giận
 
 Nhãn cụ thể giúp quán biết sửa gì; đánh giá thấp có gợi ý báo sự cố để được hoàn tiền.
 
@@ -226,7 +194,7 @@ Nhãn cụ thể giúp quán biết sửa gì; đánh giá thấp có gợi ý b
 | Thời gian giao dự kiến | Thời gian chuẩn bị trung bình của quán + thời gian đi từ quán tới khách |
 | Trạng thái quán | Đang mở, Sắp đóng (≤ 30 phút), Đóng cửa, Tạm ngưng |
 | Giỏ hàng | Chỉ chứa món của 1 quán |
-| Món hết | Quán tự bật tắt (Bước 3); hết món thì không thêm được |
+| Món hết | Quán tự bật tắt trên ứng dụng quán; hết món thì không thêm được |
 | Phí giao | Theo khoảng cách (Bước 1) + phụ phí cao điểm hoặc thời tiết xấu 5.000 ₫ khi có |
 | Phí dịch vụ | 3.000 ₫ mỗi đơn |
 | Phí đơn nhỏ | 5.000 ₫ khi tạm tính < 40.000 ₫ |
@@ -234,19 +202,12 @@ Nhãn cụ thể giúp quán biết sửa gì; đánh giá thấp có gợi ý b
 | Tiền mặt | Tổng ≤ 1.000.000 ₫ |
 | Đơn đang chạy | Tối đa 3 đơn cùng lúc mỗi khách |
 | Dụng cụ ăn uống | Mặc định không lấy |
-| Thời gian xác nhận | 3 phút; quá thì đơn tự huỷ |
-| Bỏ lỡ liên tiếp | 3 đơn → quán tự tạm ngưng nhận đơn |
-| Thời gian chuẩn bị | Quán chọn 5–60 phút; mặc định theo cài đặt của quán |
-| Gia hạn | 1 lần mỗi đơn, +5 hoặc +10 phút |
-| Báo hết món sau khi nhận | Khách có 3 phút để chọn bỏ món hoặc huỷ đơn |
-| Tạm ngưng | 30 phút, 1 giờ, hết ngày, hoặc tới khi bật lại |
-| Thời điểm tìm | Chuẩn bị ≤ 15 phút → tìm ngay khi quán nhận; dài hơn → tìm khi còn 10 phút |
-| Bán kính tìm | 3 km quanh quán, +1 km mỗi phút, tối đa 6 km |
-| Thời gian trả lời | 20 giây mỗi tài xế |
-| Không tìm được | 25 phút kể từ khi bắt đầu tìm → huỷ đơn, hoàn tiền |
-| Thu nhập tài xế | Phí giao (gồm phụ phí) − 10% chiết khấu + thưởng (nếu có) + 100% tip |
-| Chờ khách | Gọi ≥ 2 lần, chờ 10 phút tại điểm giao |
-| Ảnh xác nhận | Bắt buộc khi không giao tận tay |
+| Chờ quán xác nhận | Tối đa 3 phút; quá thì đơn tự huỷ, hoàn ví |
+| Chọn khi món hết | 3 phút; không chọn thì món tự được bỏ |
+| Tìm tài xế | Tối đa 25 phút; không tìm được thì huỷ, hoàn ví |
+| Vị trí tài xế | Cập nhật mỗi 5 giây |
+| Chờ khách khi tài xế tới | 10 phút; tài xế gọi ít nhất 2 lần |
+| Liên lạc tài xế | Qua số trung gian, tới 1 giờ sau khi kết thúc đơn |
 | Khách tự huỷ | Chỉ khi quán chưa nhận đơn; miễn phí |
 | Hoàn tiền về ví | ≤ 5 phút |
 | Đánh giá | Trong 7 ngày sau khi giao |
@@ -266,13 +227,11 @@ Nhãn cụ thể giúp quán biết sửa gì; đánh giá thấp có gợi ý b
 flowchart LR
   L1["Bước 1 · Khám phá quán & món"]
   L2["Bước 2 · Giỏ hàng & đặt đơn"]
-  L3["Bước 3 · Quán nhận & chuẩn bị đơn"]
-  L4["Bước 4 · Tài xế nhận & giao đơn"]
-  L5["Bước 5 · Huỷ, đánh giá & sự cố"]
+  L3["Bước 3 · Theo dõi đơn"]
+  L4["Bước 4 · Huỷ, đánh giá & sự cố"]
   L1 --> L2
   L2 --> L3
   L3 --> L4
-  L4 --> L5
 ```
 
 ### 6.2 Bước 1 · Khám phá quán & món
@@ -317,57 +276,34 @@ flowchart LR
 | 3 | Tiền | Từng khoản phí, tổng | Khách biết trả bao nhiêu |
 | 4 | Đặt | Thanh toán, nút "Đặt đơn · {tổng}" | Đơn gửi quán |
 
-### 6.4 Bước 3 · Quán nhận & chuẩn bị đơn
+### 6.4 Bước 3 · Theo dõi đơn
 
 ```mermaid
 flowchart LR
-  A["Đơn mới, chuông"] --> B{"Quán làm được?"}
-  B -->|Được| C["Nhận, chọn thời gian chuẩn bị"]
-  B -->|Không| D["Từ chối, lý do"]
-  C --> E["Đang làm"]
-  E --> F{"Thiếu món?"}
-  F -->|Có| G["Báo hết món, khách chọn"]
-  G --> E
-  F -->|Không| H["Báo món đã xong"]
-  H --> I["Chờ tài xế, Bước 4"]
-  I --> J["Tài xế lấy món"]
+  A["Đặt đơn xong, Bước 2"] --> B["Chờ quán xác nhận"]
+  B -->|Quán từ chối, quá 3 phút| X["Huỷ, hoàn tiền"]
+  B -->|Quán nhận| C["Quán đang chuẩn bị"]
+  C -->|Hết món| D["Khách chọn bỏ món hoặc huỷ"]
+  D --> C
+  C --> E["Đang tìm tài xế"]
+  E -->|Quá 25 phút| X
+  E --> F["Tài xế đang tới quán"]
+  F --> G["Tài xế đang giao, bản đồ"]
+  G --> H["Tài xế đã tới"]
+  H -->|Nhận đồ| I["Đã giao, đánh giá, Bước 4"]
+  H -->|Không ra nhận 10 phút| J["Giao thất bại"]
 ```
 
-| **Bước** | **Giai đoạn** | **Trải nghiệm** | **Đầu ra** |
+| **Bước** | **Giai đoạn** | **Khách thấy** | **Khách làm** |
 | --- | --- | --- | --- |
-| 1 | Đơn tới | Toàn màn đơn mới, chuông lặp, đếm ngược | Quán biết có đơn |
-| 2 | Quyết định | Nhận với thời gian chuẩn bị hoặc từ chối | Đơn đang làm hoặc huỷ |
-| 3 | Làm món | Danh sách đơn đang làm, đơn nào sắp trễ | Món xong |
-| 4 | Bàn giao | Báo xong; thấy tài xế nào tới, mã đơn | Tài xế lấy món |
+| 1 | Chờ quán | "Chờ quán xác nhận", đếm ngược | Huỷ miễn phí nếu muốn (Bước 4) |
+| 2 | Quán chuẩn bị | Giờ giao dự kiến | Chọn khi món hết |
+| 3 | Tìm, chờ tài xế | "Đang tìm tài xế", rồi thông tin tài xế | – |
+| 4 | Đang giao | Bản đồ, giờ tới | Gọi, nhắn tài xế |
+| 5 | Tài xế tới | "Tài xế đã tới", nút gọi nổi bật | Ra nhận đồ |
+| 6 | Kết thúc | Đã giao, ảnh giao (nếu có) | Đánh giá (Bước 4) |
 
-### 6.5 Bước 4 · Tài xế nhận & giao đơn
-
-```mermaid
-flowchart LR
-  A["Quán nhận đơn, Bước 3"] --> B["Tìm tài xế"]
-  B --> C["Tài xế nhận"]
-  C --> D["Đến quán"]
-  D --> E{"Món xong?"}
-  E -->|Chưa| F["Chờ"]
-  F --> E
-  E -->|Xong| G["Đối chiếu mã, lấy món"]
-  G --> H["Giao tới khách"]
-  H --> I{"Gặp khách?"}
-  I -->|Có| J["Giao, thu tiền mặt nếu có"]
-  I -->|Không| K["Gọi, chờ 10 phút"]
-  K -->|Vẫn không| L["Giao thất bại"]
-  J --> M["Đã giao, Bước 5"]
-```
-
-| **Bước** | **Giai đoạn** | **Khách thấy** | **Tài xế thấy** | **Quán thấy** |
-| --- | --- | --- | --- | --- |
-| 1 | Tìm tài xế | "Đang tìm tài xế" | Yêu cầu đơn | "Đang tìm tài xế" |
-| 2 | Đến quán | Tài xế, biển số, "đang tới quán" | Dẫn đường tới quán | Tài xế, thời gian tới |
-| 3 | Lấy món | "Tài xế đã lấy món" | Mã đơn, danh sách món | Đơn sang Đã xong |
-| 4 | Giao | Bản đồ, giờ tới | Dẫn đường, địa chỉ chi tiết, ghi chú | – |
-| 5 | Kết thúc | "Đã giao", đánh giá | Thu tiền, thu nhập | – |
-
-### 6.6 Bước 5 · Huỷ, đánh giá & sự cố
+### 6.5 Bước 4 · Huỷ, đánh giá & sự cố
 
 ```mermaid
 flowchart LR
@@ -510,131 +446,63 @@ AC02: Quán vừa đóng, món vừa hết, giá đổi → báo cụ thể, kh�
 
 AC03: Đặt thành công → màn theo dõi đơn ở trạng thái "Chờ quán xác nhận".
 
-### Bước 3 · Quán nhận & chuẩn bị đơn
+### Bước 3 · Theo dõi đơn
 
-#### UC8. Nhận hoặc từ chối đơn
+#### UC8. Theo dõi trạng thái
 
-##### US8.1 Không bỏ lỡ đơn mới
+##### US8.1 Biết đơn đang ở đâu
 
-User Story: Là chủ quán, tôi muốn app kêu to và lặp lại khi có đơn để không bỏ lỡ lúc đang bận.
+User Story: Là khách, tôi muốn thấy đơn đang ở bước nào và mấy giờ tới để chủ động.
 
-AC01: Đơn mới → âm thanh lặp mỗi 5 giây, màn đơn mới toàn màn hình, đếm ngược 3 phút.
+AC01: Tiêu đề trạng thái và tiến trình: Đã đặt → Quán chuẩn bị → Đang giao → Đã giao.
 
-AC02: Nhiều đơn mới cùng lúc → hiện lần lượt, ghi "1/3".
+AC02: Giờ giao dự kiến dạng khoảng ("12:25–12:35"); trễ hơn 5 phút so với lần báo trước → push.
 
-AC03: App chạy nền hoặc màn hình tắt vẫn có thông báo kèm âm thanh.
+AC03: Trang chủ có banner đơn đang giao; chạm mở màn theo dõi.
 
-##### US8.2 Nhận đơn
+##### US8.2 Khi quán không nhận đơn
 
-AC01: Chọn thời gian chuẩn bị (gợi ý theo số món), bấm "Nhận đơn".
+AC01: Đếm ngược 3 phút chờ quán; quán từ chối hoặc hết giờ → báo lý do, hoàn tiền nếu đã trả ví, gợi ý quán khác.
 
-AC02: Nhận xong, khách thấy "Quán đang chuẩn bị" và hệ thống bắt đầu tìm tài xế.
+#### UC9. Thay đổi trong lúc quán chuẩn bị
 
-##### US8.3 Từ chối đơn
+##### US9.1 Món hết
 
-AC01: Lý do: Hết món (chọn món hết), Quán quá tải, Sắp đóng cửa, Khác.
+User Story: Là khách, tôi muốn được chọn bỏ món hay huỷ đơn khi quán báo hết một món.
 
-AC02: Từ chối vì hết món → món đó tự chuyển "Hết món".
+AC01: Popup nêu món hết, số tiền sẽ hoàn nếu bỏ món; nút "Bỏ món", "Huỷ đơn".
 
-AC03: Quá 3 phút không phản hồi → đơn tự huỷ; 3 đơn liên tiếp → quán tự tạm ngưng.
+AC02: 3 phút không chọn → món tự được bỏ; mọi món đều hết → đơn huỷ, hoàn toàn bộ.
 
-#### UC9. Chuẩn bị đơn
+##### US9.2 Quán cần thêm thời gian
 
-##### US9.1 Theo dõi đơn đang làm
+AC01: Push giờ giao mới; màn theo dõi cập nhật.
 
-AC01: Đơn đang làm xếp theo thời điểm phải xong, đơn sắp trễ (≤ 2 phút) nổi bật.
+#### UC10. Tài xế và nhận đồ
 
-AC02: Chi tiết đơn: món, tuỳ chọn, ghi chú, dụng cụ, mã đơn, tên khách viết tắt.
+##### US10.1 Thấy tài xế
 
-##### US9.2 Báo hết món sau khi đã nhận
+AC01: Khi có tài xế: ảnh, tên, biển số; bản đồ vị trí cập nhật mỗi 5 giây; "Cập nhật {n} giây trước" khi mất tín hiệu.
 
-User Story: Là quán, tôi muốn báo một món vừa hết để khách chọn bỏ món hoặc huỷ đơn.
+AC02: Không tìm được tài xế sau 25 phút → đơn huỷ, hoàn tiền, xin lỗi kèm nút đặt lại.
 
-AC01: Chọn món hết → khách nhận thông báo, có 3 phút để chọn.
+##### US10.2 Liên lạc tài xế
 
-AC02: Khách không trả lời → bỏ món đó, hoàn tiền món nếu đã trả ví.
+AC01: Gọi qua số trung gian; nhắn tin trong app với tin nhắn nhanh ("Tôi đang xuống", "Để ở bảo vệ giúp tôi").
 
-AC03: Mọi món đều hết → đơn huỷ, không tính lỗi cho khách.
+##### US10.3 Ra nhận đồ
 
-##### US9.3 Gia hạn và báo xong
+AC01: Tài xế tới → push, màn theo dõi đổi sang "Tài xế đã tới", nút gọi nổi bật.
 
-AC01: Quá thời gian chuẩn bị → nhắc quán; quán gia hạn +5 hoặc +10 phút một lần; khách được báo giờ mới.
+AC02: Giao để ở bảo vệ, lễ tân → ảnh xác nhận hiện trên màn.
 
-AC02: Bấm "Món đã xong" → đơn chuyển chờ tài xế; tài xế nhận thông báo.
+AC03: Không ra nhận trong 10 phút và tài xế đã gọi ít nhất 2 lần → giao thất bại, đơn vẫn tính tiền.
 
-AC03: Thấy tên, biển số, thời gian tài xế tới quán khi đã có tài xế.
+### Bước 4 · Huỷ, đánh giá & sự cố
 
-#### UC10. Trạng thái quán và món
+#### UC11. Huỷ đơn
 
-AC01: Tắt món hết, tuỳ chọn hết bằng một chạm; có tìm món.
-
-AC02: Tạm ngưng nhận đơn 30 phút, 1 giờ, hết ngày, hoặc tới khi bật lại; khách thấy "Tạm ngưng".
-
-### Bước 4 · Tài xế nhận & giao đơn
-
-#### UC11. Tìm và nhận đơn
-
-##### US11.1 Quyết định nhanh
-
-User Story: Là tài xế, tôi muốn thấy quán, quãng đường, thu nhập trước khi nhận.
-
-AC01: Thẻ yêu cầu: tên quán, khoảng cách tới quán, quãng đường giao, thu nhập dự kiến, giờ món xong, tiền mặt cần thu (nếu có).
-
-AC02: Đếm ngược 20 giây; nhận bằng một chạm.
-
-AC03: Hết giờ hoặc bỏ qua → gửi tài xế khác.
-
-##### US11.2 Không tìm được tài xế
-
-AC01: Khách thấy "Đang tìm tài xế" với thời gian đã tìm.
-
-AC02: Quá 25 phút → đơn huỷ, hoàn tiền, khách được xin lỗi kèm gợi ý đặt lại.
-
-#### UC12. Lấy món
-
-##### US12.1 Lấy đúng đơn
-
-User Story: Là tài xế, tôi muốn đối chiếu mã đơn để không lấy nhầm.
-
-AC01: Đến quán (trong 100 m) → nút "Đã đến quán"; quán thấy tài xế đã tới.
-
-AC02: Màn lấy món: mã đơn chữ to, danh sách món để tích kiểm.
-
-AC03: Món chưa xong → hiện "Quán đang chuẩn bị, xong lúc {giờ}"; chưa cho bấm "Đã lấy món".
-
-AC04: Chờ quá 10 phút sau giờ hẹn → nút báo hỗ trợ.
-
-#### UC13. Giao đơn
-
-##### US13.1 Theo dõi đơn
-
-User Story: Là khách, tôi muốn thấy tài xế đang ở đâu và mấy giờ tới.
-
-AC01: Từ khi tài xế lấy món: bản đồ vị trí tài xế cập nhật mỗi 5 giây, giờ tới dự kiến.
-
-AC02: Thấy tên, ảnh, biển số, nút gọi, nhắn tin.
-
-##### US13.2 Giao hàng
-
-AC01: Tài xế thấy địa chỉ chi tiết, ghi chú, tên người nhận; gọi qua số trung gian.
-
-AC02: Giao tận tay → bấm "Đã giao"; để theo ghi chú → bắt buộc chụp ảnh.
-
-AC03: Đơn tiền mặt → màn thu tiền ghi rõ số tiền.
-
-##### US13.3 Không gặp khách
-
-AC01: Tài xế gọi ≥ 2 lần qua app; khách nhận thông báo "Tài xế đã tới".
-
-AC02: Sau 10 phút chờ tại điểm giao → được bấm "Giao thất bại" với lý do.
-
-AC03: Khách bị tính tiền đơn; tài xế vẫn nhận thu nhập.
-
-### Bước 5 · Huỷ, đánh giá & sự cố
-
-#### UC14. Huỷ đơn
-
-##### US14.1 Huỷ khi quán chưa nhận
+##### US11.1 Huỷ khi quán chưa nhận
 
 User Story: Là khách đặt nhầm, tôi muốn huỷ ngay khi quán chưa nhận để không mất tiền.
 
@@ -642,13 +510,13 @@ AC01: Đơn chờ quán xác nhận → nút "Huỷ đơn"; chọn lý do; huỷ
 
 AC02: Quán vừa nhận đúng lúc khách bấm huỷ → báo không huỷ được nữa.
 
-##### US14.2 Khi không còn huỷ được
+##### US11.2 Khi không còn huỷ được
 
 AC01: Quán đã nhận → không có nút huỷ; hiện "Quán đã bắt đầu chuẩn bị" và nút "Cần hỗ trợ".
 
-#### UC15. Đánh giá và tip
+#### UC12. Đánh giá và tip
 
-##### US15.1 Đánh giá quán, tài xế
+##### US12.1 Đánh giá quán, tài xế
 
 AC01: Sau khi giao, màn đánh giá hiện tự động một lần; vào lại được từ chi tiết đơn trong 7 ngày.
 
@@ -656,15 +524,15 @@ AC02: Quán: 1–5 sao, nhãn theo số sao, bình luận ≤ 300 ký tự, ≤ 
 
 AC03: Quán ≤ 2 sao → bắt buộc chọn ít nhất 1 nhãn; nhãn Thiếu món, Sai món → gợi ý báo sự cố.
 
-##### US15.2 Tip tài xế
+##### US12.2 Tip tài xế
 
 AC01: Chọn mức tip; trừ ví; tài xế nhận 100%.
 
 AC02: Ví không đủ → báo; không ảnh hưởng đánh giá.
 
-#### UC16. Báo sự cố
+#### UC13. Báo sự cố
 
-##### US16.1 Thiếu, sai, đổ vỡ, chất lượng
+##### US13.1 Thiếu, sai, đổ vỡ, chất lượng
 
 User Story: Là khách nhận thiếu món, tôi muốn báo trong vài chạm và được hoàn tiền ngay.
 
@@ -674,11 +542,11 @@ AC02: Hiện số tiền hoàn trước khi gửi.
 
 AC03: Đủ điều kiện → hoàn ví ngay, báo thành công; không đủ → hỗ trợ duyệt trong 24 giờ.
 
-##### US16.2 Không nhận được đơn
+##### US13.2 Không nhận được đơn
 
 AC01: Đơn báo đã giao nhưng khách không nhận → gửi yêu cầu; hỗ trợ đối chiếu ảnh, vị trí giao.
 
-#### UC17. Lịch sử và đặt lại
+#### UC14. Lịch sử và đặt lại
 
 AC01: Lịch sử 6 tháng; mỗi đơn: quán, ngày, món, tổng, trạng thái.
 
@@ -698,19 +566,12 @@ AC02: "Đặt lại" thêm món còn bán vào giỏ (Bước 2).
 | Tỉ lệ tài xế gọi hỏi địa chỉ | Đơn tài xế gọi khách trước khi tới / tổng đơn | ≤ 15% |
 | Tỉ lệ chạm giải thích phí | Phiên chạm ⓘ / phiên mở giỏ | Theo dõi |
 | Đơn trùng | Đơn trùng do bấm nhiều lần | 0 |
-| Tỉ lệ quán không phản hồi | Đơn tự huỷ do quá 3 phút / tổng đơn | ≤ 2% |
-| Thời gian nhận đơn | Đơn tới quán → quán nhận (trung vị) | ≤ 60 giây |
-| Tỉ lệ từ chối | Đơn quán từ chối / tổng đơn | ≤ 5% |
-| Tỉ lệ báo hết món sau nhận | Đơn có báo hết món / đơn đã nhận | ≤ 3% |
-| Đúng giờ chuẩn bị | Đơn báo xong trước giờ hẹn (gồm gia hạn) / đơn đã nhận | ≥ 85% |
-| Tài xế chờ tại quán | Tài xế tới quán → lấy món (trung vị) | ≤ 5 phút |
-| Tỉ lệ có tài xế trong 10 phút | Đơn có tài xế ≤ 10 phút từ khi tìm / đơn cần tài xế | ≥ 95% |
-| Tỉ lệ huỷ vì không có tài xế | Đơn huỷ lý do này / tổng đơn | ≤ 1% |
-| Tài xế chờ tại quán | Đến quán → lấy món (trung vị) | ≤ 5 phút |
-| Món chờ tài xế | Quán báo xong → tài xế lấy (trung vị) | ≤ 5 phút |
-| Lấy nhầm | Khiếu nại nhận nhầm đơn / tổng đơn | ≤ 0,1% |
-| Giao thất bại | Đơn `GIAO_THAT_BAI` / tổng đơn | ≤ 1% |
+| Cuộc gọi hỏi đơn | Cuộc gọi, chat hỗ trợ hỏi trạng thái / tổng đơn | Giảm 50% |
 | Đúng giờ | Đơn giao trước giờ dự kiến cuối / tổng đơn | ≥ 85% |
+| Huỷ vì quán, không có tài xế | Đơn huỷ do quán từ chối, quá giờ, không có tài xế / tổng đơn | ≤ 4% |
+| Chọn khi món hết | Khách chọn trong 3 phút / lần quán báo hết món | Theo dõi |
+| Dùng nhắn tin | Đơn có tin nhắn khách – tài xế / tổng đơn | Theo dõi |
+| Giao thất bại | Đơn `GIAO_THAT_BAI` / tổng đơn | ≤ 1% |
 | Hoàn tự động | Sự cố hoàn tự động trong 5 phút / sự cố thiếu, sai món | ≥ 70% |
 | Tỉ lệ đánh giá | Đơn có đánh giá / đơn đã giao | ≥ 35% |
 | Tỉ lệ tip | Đơn có tip / đơn đã giao | Theo dõi |
@@ -722,19 +583,15 @@ AC02: "Đặt lại" thêm món còn bán vào giỏ (Bước 2).
 
 | **Mục** | **Mô tả** | **Hướng xử lý** |
 | --- | --- | --- |
-| Dữ liệu menu do quán nhập | Ảnh xấu, giá sai, quên tắt món hết | Quán bật tắt món nhanh (Bước 3); nhắc khi bị từ chối vì hết món |
+| Dữ liệu menu do quán nhập | Ảnh xấu, giá sai, quên tắt món hết | Quán bật tắt món nhanh trên ứng dụng quán; nhắc khi bị từ chối vì hết món |
 | Thời gian dự kiến | Sai lệch giờ cao điểm | Tính từ dữ liệu thực tế 7 ngày, cập nhật mỗi 15 phút |
 | Dịch vụ bản đồ | Tính đường đi chậm | Ước tính theo đường chim bay × 1,3 khi chưa có kết quả |
 | Ví liên kết | Lỗi, chậm khi trừ tiền | Thời gian chờ 15 giây, báo lỗi rõ, gợi ý tiền mặt |
 | Phụ phí thời tiết | Khách phản ứng | Hiện nhãn và giải thích; chỉ áp khi vận hành bật theo khu vực |
-| Đơn tiền mặt bị bom | Khách không nhận hàng | Giới hạn tiền mặt; khoá tiền mặt với khách có 2 lần không nhận (Bước 5) |
-| Thiết bị quán | Điện thoại cũ, tắt âm, chế độ tiết kiệm pin | Kiểm tra quyền thông báo, âm lượng khi bật nhận đơn; nhắc tắt tối ưu pin |
-| Mạng quán yếu | Đơn tới chậm | Push dự phòng; trạng thái mạng trên đầu app |
-| Quán lạm dụng thời gian chuẩn bị dài | Khách chờ lâu | Thời gian dự kiến cho khách dùng số thực tế (Bước 1) |
-| Thiếu tài xế giờ cao điểm, mưa | Đơn chờ lâu | Phụ phí (Bước 2), thưởng thêm cho tài xế khi tìm lâu |
-| Định vị tài xế | Mất GPS trong hẻm, toà nhà | Hiện "Cập nhật {n} giây trước"; không suy đoán vị trí |
+| Đơn tiền mặt bị bom | Khách không nhận hàng | Giới hạn tiền mặt; khoá tiền mặt với khách có 2 lần không nhận (Bước 4) |
+| Ứng dụng quán, tài xế | Cập nhật trạng thái chậm | Đồng bộ thời gian thực, dự phòng làm mới mỗi 10 giây |
+| Định vị tài xế | Mất GPS trong hẻm, toà nhà | Hiện thời điểm cập nhật cuối, không đoán vị trí |
 | Số trung gian | Lỗi nhà mạng | Nhắn tin trong app luôn khả dụng |
-| An toàn thực phẩm | Đồ ăn của đơn giao thất bại | Tài xế không giao lại cho người khác; hướng dẫn xử lý theo chính sách |
 | Lạm dụng hoàn tiền | Báo sự cố giả | Ngưỡng tự động theo lịch sử; ảnh bắt buộc; hỗ trợ duyệt khi vượt ngưỡng |
 | Đánh giá ác ý | Quán bị đánh giá thấp không công bằng | Chỉ khách đã nhận đơn mới đánh giá; ẩn bình luận vi phạm theo báo cáo |
 | Tranh chấp với quán | Quán không đồng ý bị trừ tiền | Quán khiếu nại trên web quản lý (ngoài phạm vi) |
@@ -748,18 +605,14 @@ AC02: "Đặt lại" thêm món còn bán vào giỏ (Bước 2).
 - Thời gian dự kiến hiện một số hay khoảng? → **Đã chốt:** Khoảng 10 phút, ví dụ "25–35 phút" (SRS BR-03).
 - Có hiện quán ngoài bán kính 10 km? → **Đã chốt:** Không (SRS BR-02).
 - Trừ tiền ví lúc nào? → **Đã chốt:** Ngay khi đặt đơn; hoàn tự động nếu đơn bị huỷ không do lỗi khách (SRS BR-16).
-- Tip cho tài xế đặt ở bước nào? → **Đã chốt:** Sau khi giao, ở màn đánh giá (Bước 5), không ở bước đặt đơn.
+- Tip cho tài xế đặt ở bước nào? → **Đã chốt:** Sau khi giao, ở màn đánh giá (Bước 4), không ở bước đặt đơn.
 - Giỏ hàng giữ bao lâu? → **Đã chốt:** 24 giờ, lưu theo tài khoản (SRS BR-11).
 - Có cho đổi phương thức thanh toán sau khi đặt? → **Đã chốt:** Không (SRS BR-16).
-- Tìm tài xế lúc quán nhận hay lúc món xong? → **Đã chốt:** Lúc quán nhận nếu thời gian chuẩn bị ≤ 15 phút; dài hơn thì bắt đầu tìm khi còn 10 phút (Bước 4 BR-34).
-- Quán có huỷ đơn sau khi đã nhận? → **Đã chốt:** Chỉ qua "Báo hết món" (bỏ hết món) hoặc gọi hỗ trợ; không có nút huỷ tự do (SRS BR-28).
-- Ai xác nhận đã bàn giao cho tài xế? → **Đã chốt:** Tài xế bấm "Đã lấy món" (Bước 4); quán chỉ thấy trạng thái (SRS BR-30).
-- Món tắt "hết" có tự bật lại? → **Đã chốt:** Quán chọn "Hết hôm nay" (tự bật lúc mở cửa hôm sau) hoặc "Hết tới khi bật lại" (SRS BR-32).
-- Tài xế có ứng tiền trả quán với đơn tiền mặt? → **Đã chốt:** Không. Nền tảng thanh toán cho quán; tài xế chỉ thu tiền khách và đối soát với nền tảng (SRS BR-42).
-- Tài xế huỷ sau khi nhận thì sao? → **Đã chốt:** Trước khi lấy món: tìm tài xế khác, tối đa 2 lần. Sau khi lấy món: không huỷ trong app, phải báo sự cố qua hỗ trợ (SRS BR-46).
-- Có cho khách đổi địa chỉ khi đang giao? → **Đã chốt:** Không ở MVP; khách nhắn tài xế (SRS BR-44).
-- Ảnh xác nhận có hiện cho khách? → **Đã chốt:** Có, trong chi tiết đơn (SRS BR-42).
-- Đơn tiền mặt có sự cố thì hoàn bằng gì? → **Đã chốt:** Hoàn vào ví của khách (SRS BR-53).
-- Đánh giá tài xế có công khai? → **Đã chốt:** Không; chỉ dùng nội bộ. Đánh giá quán công khai với tên viết tắt (SRS BR-50).
-- Khách huỷ sau khi quán nhận qua hỗ trợ có mất tiền? → **Đã chốt:** Do hỗ trợ quyết định theo từng trường hợp; app chỉ dẫn tới hỗ trợ (SRS BR-47).
-- Ai chịu tiền bồi hoàn? → **Đã chốt:** Thiếu, sai, chất lượng → trừ vào tiền quán; đổ vỡ khi giao → nền tảng chịu (SRS BR-58).
+- Khách có huỷ được khi quán đã nhận? → **Đã chốt:** Không trong app; nút "Cần hỗ trợ" (Bước 4 BR-35).
+- Có cho đổi địa chỉ khi đang giao? → **Đã chốt:** Không; khách nhắn tài xế (SRS BR-33).
+- Ảnh giao có hiện cho khách? → **Đã chốt:** Có, trên màn theo dõi và chi tiết đơn (SRS BR-32).
+- Giờ dự kiến trễ bao nhiêu thì báo? → **Đã chốt:** Trễ hơn 5 phút so với lần báo trước (SRS BR-25).
+- Đơn tiền mặt có sự cố thì hoàn bằng gì? → **Đã chốt:** Hoàn vào ví của khách (SRS BR-41).
+- Đánh giá tài xế có công khai? → **Đã chốt:** Không; chỉ dùng nội bộ. Đánh giá quán công khai với tên viết tắt (SRS BR-38).
+- Khách huỷ sau khi quán nhận qua hỗ trợ có mất tiền? → **Đã chốt:** Do hỗ trợ quyết định theo từng trường hợp; app chỉ dẫn tới hỗ trợ (SRS BR-35).
+- Ai chịu tiền bồi hoàn? → **Đã chốt:** Thiếu, sai, chất lượng → trừ vào tiền quán; đổ vỡ khi giao → nền tảng chịu (SRS BR-46).
