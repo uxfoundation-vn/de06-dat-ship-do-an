@@ -2,39 +2,45 @@
 
 > **Mã:** DE06 · **Độ khó:** 6/8 · **Vai trò:** 3 (khách, quán, tài xế) · **Nền tảng:** App khách iOS / Android · App quán (điện thoại hoặc tablet) · App tài xế iOS / Android
 
-Nền tảng giao đồ ăn: khách chọn quán và món, đặt đơn; quán nhận và chuẩn bị; hệ thống tìm tài xế đúng lúc món xong; tài xế lấy món, giao tới khách; khách theo dõi trên bản đồ, đánh giá, báo sự cố nếu có. Đây là đề có **ba bên cùng thao tác trên một đơn** và **thời điểm phải khớp nhau** (món xong – tài xế tới). Đề gồm 5 tính năng; mỗi tính năng có 1 PRD và 1 SRS riêng.
+Nền tảng giao đồ ăn: khách chọn quán và món, đặt đơn; quán nhận và chuẩn bị; hệ thống tìm tài xế đúng lúc món xong; tài xế lấy món, giao tới khách; khách theo dõi trên bản đồ, đánh giá, báo sự cố nếu có. Đây là đề có **ba bên cùng thao tác trên một đơn** và **thời điểm phải khớp nhau** (món xong – tài xế tới). Đề gồm **1 tính năng**, là **1 luồng** gồm 5 bước và các màn hình; tài liệu gồm 1 PRD và 1 SRS.
 
 ## Tính năng
 
-| **Mã** | **Tính năng** | **Phạm vi** | **PRD** | **SRS** |
-| --- | --- | --- | --- | --- |
-| TN01 | Khám phá quán & món | Địa chỉ giao, danh mục, thẻ quán, tìm kiếm, lọc, menu, tuỳ chọn món | [PRD](docs/TN01-kham-pha-quan-mon/PRD.md) | [SRS](docs/TN01-kham-pha-quan-mon/SRS.md) |
-| TN02 | Giỏ hàng & đặt đơn | Giỏ 1 quán, địa chỉ chi tiết, người nhận, bảng phí, tiền mặt hoặc ví, đặt đơn | [PRD](docs/TN02-gio-hang-dat-don/PRD.md) | [SRS](docs/TN02-gio-hang-dat-don/SRS.md) |
-| TN03 | Quán nhận & chuẩn bị đơn | Chuông đơn mới, nhận hoặc từ chối, báo hết món, gia hạn, báo xong, tạm ngưng | [PRD](docs/TN03-quan-nhan-chuan-bi-don/PRD.md) | [SRS](docs/TN03-quan-nhan-chuan-bi-don/SRS.md) |
-| TN04 | Tài xế nhận & giao đơn | Thời điểm tìm, ghép tài xế, lấy món đối chiếu mã, giao, ảnh xác nhận, không gặp khách, theo dõi đơn | [PRD](docs/TN04-tai-xe-giao-don/PRD.md) | [SRS](docs/TN04-tai-xe-giao-don/SRS.md) |
-| TN05 | Huỷ, đánh giá & sự cố | Khách huỷ, hoàn ví, đánh giá quán và tài xế, tip, báo sự cố, bồi hoàn, lịch sử, đặt lại | [PRD](docs/TN05-huy-danh-gia-su-co/PRD.md) | [SRS](docs/TN05-huy-danh-gia-su-co/SRS.md) |
+| **Tính năng** | **Luồng** | **PRD** | **SRS** |
+| --- | --- | --- | --- |
+| Đặt ship đồ ăn | Khám phá quán & món → Giỏ hàng & đặt đơn → Quán nhận & chuẩn bị đơn → Tài xế nhận & giao đơn → Huỷ, đánh giá & sự cố | [PRD](docs/PRD.md) | [SRS](docs/SRS.md) |
 
-Thứ tự làm gợi ý: TN01 → TN02 → TN03 → TN04 → TN05.
+## Các bước và màn hình của luồng
+
+| **Bước** | **Tên bước** | **Màn hình** | **Phạm vi** |
+| --- | --- | --- | --- |
+| Bước 1 | Khám phá quán & món | SCR-K01, SCR-K02, SCR-K03, SCR-K04 | Địa chỉ giao, danh mục, thẻ quán, tìm kiếm, lọc, menu, tuỳ chọn món |
+| Bước 2 | Giỏ hàng & đặt đơn | SCR-K05, SCR-K06 | Giỏ 1 quán, địa chỉ chi tiết, người nhận, bảng phí, tiền mặt hoặc ví, đặt đơn |
+| Bước 3 | Quán nhận & chuẩn bị đơn | SCR-Q01, SCR-Q02, SCR-Q03 | Chuông đơn mới, nhận hoặc từ chối, báo hết món, gia hạn, báo xong, tạm ngưng |
+| Bước 4 | Tài xế nhận & giao đơn | SCR-T01, SCR-T02, SCR-T03, SCR-T04, SCR-K07 | Thời điểm tìm, ghép tài xế, lấy món đối chiếu mã, giao, ảnh xác nhận, không gặp khách, theo dõi đơn |
+| Bước 5 | Huỷ, đánh giá & sự cố | SCR-K08, SCR-K09, SCR-K10 | Khách huỷ, hoàn ví, đánh giá quán và tài xế, tip, báo sự cố, bồi hoàn, lịch sử, đặt lại |
+
+Luồng: Bước 1 Khám phá quán & món → Bước 2 Giỏ hàng & đặt đơn → Bước 3 Quán nhận & chuẩn bị đơn → Bước 4 Tài xế nhận & giao đơn → Bước 5 Huỷ, đánh giá & sự cố.
 
 ## Vòng đời đơn hàng (dùng chung cả đề)
 
 ```mermaid
 stateDiagram-v2
-  [*] --> CHO_QUAN_XAC_NHAN : Khách đặt đơn, TN02
-  CHO_QUAN_XAC_NHAN --> DANG_CHUAN_BI : Quán nhận, TN03
-  CHO_QUAN_XAC_NHAN --> DA_HUY : Khách huỷ TN05, quán từ chối hoặc quá 3 phút TN03
-  DANG_CHUAN_BI --> SAN_SANG : Quán báo món đã xong, TN03
-  DANG_CHUAN_BI --> DA_HUY : Hết mọi món TN03, không có tài xế TN04
-  SAN_SANG --> DANG_GIAO : Tài xế lấy món, TN04
-  SAN_SANG --> DA_HUY : Không có tài xế, TN04
-  DANG_GIAO --> DA_GIAO : Tài xế giao xong, TN04
-  DANG_GIAO --> GIAO_THAT_BAI : Không gặp khách sau 10 phút, TN04
+  [*] --> CHO_QUAN_XAC_NHAN : Khách đặt đơn, Bước 2
+  CHO_QUAN_XAC_NHAN --> DANG_CHUAN_BI : Quán nhận, Bước 3
+  CHO_QUAN_XAC_NHAN --> DA_HUY : Khách huỷ Bước 5, quán từ chối hoặc quá 3 phút Bước 3
+  DANG_CHUAN_BI --> SAN_SANG : Quán báo món đã xong, Bước 3
+  DANG_CHUAN_BI --> DA_HUY : Hết mọi món Bước 3, không có tài xế Bước 4
+  SAN_SANG --> DANG_GIAO : Tài xế lấy món, Bước 4
+  SAN_SANG --> DA_HUY : Không có tài xế, Bước 4
+  DANG_GIAO --> DA_GIAO : Tài xế giao xong, Bước 4
+  DANG_GIAO --> GIAO_THAT_BAI : Không gặp khách sau 10 phút, Bước 4
   DA_GIAO --> [*]
   GIAO_THAT_BAI --> [*]
   DA_HUY --> [*]
 ```
 
-Song song với trạng thái đơn, **tài xế** có tiến trình riêng trong đơn (`DANG_DEN_QUAN` → `DA_DEN_QUAN` → `DA_LAY_MON` → `DANG_DEN_KHACH` → `DA_DEN_NOI_GIAO`), xem SRS TN04 mục 4.2. Việc tìm tài xế bắt đầu khi quán nhận đơn hoặc khi còn 10 phút tới giờ món xong (TN04 BR-34). Sau `DA_GIAO`, khách có thể đánh giá, tip, báo sự cố (TN05).
+Song song với trạng thái đơn, **tài xế** có tiến trình riêng trong đơn (`DANG_DEN_QUAN` → `DA_DEN_QUAN` → `DA_LAY_MON` → `DANG_DEN_KHACH` → `DA_DEN_NOI_GIAO`), xem Bước 4 mục 4.2. Việc tìm tài xế bắt đầu khi quán nhận đơn hoặc khi còn 10 phút tới giờ món xong (Bước 4 BR-34). Sau `DA_GIAO`, khách có thể đánh giá, tip, báo sự cố (Bước 5).
 
 ## Bản đồ màn hình
 
@@ -97,30 +103,30 @@ Ngoài phạm vi cả đề: web quản lý quán (menu, giá, báo cáo, đối
 - Tiền tệ VND, không có số lẻ; phí làm tròn tới 1.000 ₫.
 - Mã đơn 6 ký tự chữ và số, in hoa, dùng để quán và tài xế đối chiếu.
 - Đăng nhập cả ba app bằng số điện thoại và OTP theo luồng chuẩn, không mô tả trong bộ tài liệu này.
-- Liên lạc giữa khách và tài xế qua số trung gian và tin nhắn trong app (TN04 BR-41).
-- Mã BR, MSG, UC đánh số liên tục trong cả đề: TN01 dùng BR-01–10, MSG-01–06, UC-01–02; TN02 dùng BR-11–22, MSG-07–16, UC-03–04; TN03 dùng BR-23–33, MSG-17–24, UC-05–07; TN04 dùng BR-34–46, MSG-25–34, UC-08–10; TN05 dùng BR-47–58, MSG-35–44, UC-11–13.
+- Liên lạc giữa khách và tài xế qua số trung gian và tin nhắn trong app (Bước 4 BR-41).
+- Mã BR, MSG, UC đánh số liên tục trong cả đề: Bước 1 dùng BR-01–10, MSG-01–06, UC-01–02; Bước 2 dùng BR-11–22, MSG-07–16, UC-03–04; Bước 3 dùng BR-23–33, MSG-17–24, UC-05–07; Bước 4 dùng BR-34–46, MSG-25–34, UC-08–10; Bước 5 dùng BR-47–58, MSG-35–44, UC-11–13.
 
 ## Danh sách màn hình
 
 | **Mã** | **Màn hình** | **App** | **Mô tả chi tiết ở** |
 | --- | --- | --- | --- |
-| SCR-K01 | Trang chủ | Khách | SRS TN01 |
-| SCR-K02 | Tìm kiếm | Khách | SRS TN01 |
-| SCR-K03 | Trang quán | Khách | SRS TN01 |
-| SCR-K04 | Tuỳ chọn món | Khách | SRS TN01 |
-| SCR-K05 | Giỏ hàng & xác nhận đơn | Khách | SRS TN02 |
-| SCR-K06 | Địa chỉ giao | Khách | SRS TN02 |
-| SCR-Q01 | Danh sách đơn | Quán | SRS TN03 |
-| SCR-Q02 | Chi tiết đơn / Đơn mới | Quán | SRS TN03 |
-| SCR-Q03 | Món & trạng thái quán | Quán | SRS TN03 |
-| SCR-T01 | Trang chủ tài xế | Tài xế | SRS TN04 |
-| SCR-T02 | Yêu cầu đơn mới | Tài xế | SRS TN04 |
-| SCR-T03 | Đến quán & lấy món | Tài xế | SRS TN04 |
-| SCR-T04 | Giao cho khách | Tài xế | SRS TN04 |
-| SCR-K07 | Theo dõi đơn | Khách | SRS TN04 |
-| SCR-K08 | Đánh giá & tip | Khách | SRS TN05 |
-| SCR-K09 | Báo sự cố | Khách | SRS TN05 |
-| SCR-K10 | Lịch sử đơn & chi tiết | Khách | SRS TN05 |
+| SCR-K01 | Trang chủ | Khách | Bước 1 |
+| SCR-K02 | Tìm kiếm | Khách | Bước 1 |
+| SCR-K03 | Trang quán | Khách | Bước 1 |
+| SCR-K04 | Tuỳ chọn món | Khách | Bước 1 |
+| SCR-K05 | Giỏ hàng & xác nhận đơn | Khách | Bước 2 |
+| SCR-K06 | Địa chỉ giao | Khách | Bước 2 |
+| SCR-Q01 | Danh sách đơn | Quán | Bước 3 |
+| SCR-Q02 | Chi tiết đơn / Đơn mới | Quán | Bước 3 |
+| SCR-Q03 | Món & trạng thái quán | Quán | Bước 3 |
+| SCR-T01 | Trang chủ tài xế | Tài xế | Bước 4 |
+| SCR-T02 | Yêu cầu đơn mới | Tài xế | Bước 4 |
+| SCR-T03 | Đến quán & lấy món | Tài xế | Bước 4 |
+| SCR-T04 | Giao cho khách | Tài xế | Bước 4 |
+| SCR-K07 | Theo dõi đơn | Khách | Bước 4 |
+| SCR-K08 | Đánh giá & tip | Khách | Bước 5 |
+| SCR-K09 | Báo sự cố | Khách | Bước 5 |
+| SCR-K10 | Lịch sử đơn & chi tiết | Khách | Bước 5 |
 
 ## Cấu trúc repo
 
@@ -128,17 +134,14 @@ Ngoài phạm vi cả đề: web quản lý quán (menu, giá, báo cáo, đối
 de06-dat-ship-do-an/
 ├── README.md
 └── docs/
-    ├── TN01-kham-pha-quan-mon/       PRD.md · SRS.md
-    ├── TN02-gio-hang-dat-don/        PRD.md · SRS.md
-    ├── TN03-quan-nhan-chuan-bi-don/  PRD.md · SRS.md
-    ├── TN04-tai-xe-giao-don/         PRD.md · SRS.md
-    └── TN05-huy-danh-gia-su-co/      PRD.md · SRS.md
+    ├── PRD.md    Bối cảnh, phạm vi, luồng, use case theo từng bước
+    └── SRS.md    Quy tắc, trạng thái, use case, màn hình, API, thông báo theo từng bước
 ```
 
 ## Cách dùng bộ tài liệu
 
 1. Đọc README để nắm vòng đời đơn và app nào thấy đơn ở bước nào.
-2. Với mỗi tính năng: đọc PRD, rồi SRS. Luôn thiết kế **cả ba phía** ở mỗi trạng thái: khách thấy gì, quán thấy gì, tài xế thấy gì.
+2. Đọc PRD để nắm toàn bộ tính năng và luồng, rồi đọc SRS theo từng bước của luồng. Luôn thiết kế **cả ba phía** ở mỗi trạng thái: khách thấy gì, quán thấy gì, tài xế thấy gì.
 3. App quán và App tài xế dùng trong môi trường ồn, bận tay, đang di chuyển: ưu tiên chữ to, nút lớn, ít thao tác.
 4. Thiết kế màn hình theo đúng mã SCR, mã MSG trong SRS để dễ đối chiếu khi review.
 5. Sơ đồ viết bằng Mermaid, xem trực tiếp trên GitHub hoặc trình xem Markdown có hỗ trợ Mermaid.
